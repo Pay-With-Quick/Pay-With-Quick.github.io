@@ -1,0 +1,36 @@
+---
+// @ts-nocheck
+/** @typedef {{ title: string; href: string; icon: string }} LinkCardItem */
+/** @type {{ items?: LinkCardItem[] }} */
+const { items = [] } = Astro.props;
+const linkCards = /** @type {LinkCardItem[]} */ (items);
+---
+
+<div class="grid grid-4">
+  {
+    linkCards.map((/** @type {LinkCardItem} */ item) => (
+      <a class="surface-card link-card icon-grid-item" href={item.href}>
+        <img src={item.icon} alt="" width="96" height="96" loading="lazy" decoding="async" />
+        <h3>{item.title}</h3>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .link-card {
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(59, 68, 246, 0.14);
+  }
+
+  .link-card h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 1.1rem;
+  }
+</style>

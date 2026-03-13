@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import FeatureGrid from "../../components/FeatureGrid.astro";
+
+const reasons = [
+  {
+    title: "Flat-Fee Pricing",
+    text: "Predictable. Transparent. Fair. Pay a simple flat fee per transaction, ideal for sales over £250.",
+    icon: "/images/icons8-guarantee-96.png"
+  },
+  {
+    title: "QR-First, In-Store Focus",
+    text: "Built for face-to-face business. Your customer simply scans a dynamic QR code to pay.",
+    icon: "/images/icons8-smartphone-96.png"
+  },
+  {
+    title: "QR-First, Omni-channel support",
+    text: "Secure, instant and flexible across all channels: in-store, online, and via payment links.",
+    icon: "/images/icons8-dispositivi-multipli-96.png"
+  },
+  {
+    title: "Merchant-First Setup",
+    text: "No upfront cost and no monthly subscription. Just plug in and start accepting payments.",
+    icon: "/images/icons8-handshake-heart-96.png"
+  },
+  {
+    title: "No Cards, No Card Networks",
+    text: "Bypass Visa and Mastercard by connecting directly to bank accounts through Pay by Bank.",
+    icon: "/images/icons8-facile-96.png"
+  },
+  {
+    title: "Optional Consumer Protection",
+    text: "Offer insurance-backed protection to increase confidence and peace of mind at checkout.",
+    icon: "/images/icons8-protezione-selezionata-96.png"
+  },
+  {
+    title: "Loyalty Integration",
+    text: "Turn payments into repeat business with cashback or loyalty points every time customers use Quick.",
+    icon: "/images/icons8-fiducia-96.png"
+  }
+];
+---
+
+<BaseLayout
+  title="Why Merchants Choose Quick | Quick"
+  description="Discover why merchants choose Quick for flat-fee pricing, instant settlements, and a merchant-first payment experience."
+  canonicalPath="/why-merchants-choose-quick/"
+>
+  <PageHero
+    eyebrow="Why Quick"
+    title="Why Merchants Choose Quick"
+    description="We're not just another payment option. We're a smarter, fairer alternative designed for modern merchants."
+    imageSrc="/images/adobestock_335183210.jpeg"
+    imageAlt="Merchant receiving digital payment"
+    primaryCta={{ href: "/contacts/", label: "Talk to us" }}
+  />
+
+  <section class="page-section">
+    <div class="container">
+      <FeatureGrid items={reasons} columns="3" />
+    </div>
+  </section>
+</BaseLayout>

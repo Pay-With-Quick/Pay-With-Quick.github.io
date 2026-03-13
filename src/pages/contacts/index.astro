@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import { site } from "../../content/site.js";
+---
+
+<BaseLayout
+  title="Contacts | Quick"
+  description="Contact Quick to discuss Pay by Bank, merchant onboarding, and a tailored cost analysis for your business."
+  canonicalPath="/contacts/"
+>
+  <PageHero
+    eyebrow="Contacts"
+    title="Let's get in touch!"
+    description="Tell us about your business and we will come back with the best way to get started with Quick."
+    imageSrc="/images/copertina.webp"
+    imageAlt="Customer and merchant discussing payments"
+  />
+
+  <section class="page-section">
+    <div class="container grid grid-2">
+      <article class="surface-card contact-form">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+          <button type="submit" class="button button-primary">Contact Us</button>
+          <p id="success-message" class="success-text" hidden>Thank you for your response.</p>
+        </form>
+      </article>
+
+      <article class="surface-card feature-card">
+        <h3>Quick</h3>
+        <p>{site.address}</p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p><a href="tel:+447786088188">{site.phone}</a></p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector("#contact-form");
+  const successMessage = document.querySelector("#success-message");
+
+  if (form instanceof HTMLFormElement && successMessage instanceof HTMLElement) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const name = String(formData.get("name") ?? "");
+      const email = String(formData.get("email") ?? "");
+      const message = String(formData.get("message") ?? "");
+      const subject = encodeURIComponent(`Website contact from ${name || "visitor"}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:${"info@paywithquick.co.uk"}?subject=${subject}&body=${body}`;
+      successMessage.hidden = false;
+      form.reset();
+    });
+  }
+</script>

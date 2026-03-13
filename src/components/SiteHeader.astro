@@ -1,0 +1,133 @@
+---
+import { navLinks, site } from "../content/site.js";
+
+const { pathname } = Astro.url;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <img src="/images/prova.png" alt="Quick logo" width="44" height="44" loading="eager" />
+      <span>{site.name}</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary">
+      <ul>
+        {
+          navLinks.map((item) => (
+            <li>
+              <a class={pathname === item.href ? "is-active" : ""} href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".site-nav");
+
+  if (button && nav) {
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!expanded));
+      nav.classList.toggle("is-open");
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(10px);
+    background: rgba(244, 247, 255, 0.9);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.08rem;
+  }
+
+  .brand img {
+    border-radius: 10px;
+  }
+
+  .site-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.35rem 0.55rem;
+    border-radius: 8px;
+  }
+
+  .site-nav a:hover,
+  .site-nav a.is-active {
+    color: var(--brand-dark);
+    background: #e8ecff;
+  }
+
+  .menu-toggle {
+    display: none;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .menu-toggle {
+      display: inline-flex;
+    }
+
+    .site-nav {
+      position: absolute;
+      inset: calc(100% + 1px) 4vw auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      padding: 0.9rem;
+      display: none;
+    }
+
+    .site-nav.is-open {
+      display: block;
+    }
+
+    .site-nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

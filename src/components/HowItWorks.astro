@@ -1,0 +1,28 @@
+---
+// @ts-nocheck
+/** @typedef {{ image: string; imageAlt?: string; text: string }} ProcessItem */
+/** @type {{ title?: string; items?: ProcessItem[] }} */
+const { title = "How it works", items = [] } = Astro.props;
+const processItems = /** @type {ProcessItem[]} */ (items);
+---
+
+<section class="page-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>{title}</h2>
+    </div>
+    <div class="stack">
+      {
+        processItems.map((/** @type {ProcessItem} */ item, /** @type {number} */ index) => (
+          <article class={`surface-card process-card grid process-split ${index % 2 === 1 ? "is-reverse" : ""}`}>
+            <img src={item.image} alt={item.imageAlt || ""} loading="lazy" decoding="async" />
+            <div>
+              <span class="eyebrow">Step {index + 1}</span>
+              <p>{item.text}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

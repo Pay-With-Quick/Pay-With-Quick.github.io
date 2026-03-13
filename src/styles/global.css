@@ -1,0 +1,365 @@
+:root {
+  --bg: #f4f7ff;
+  --surface: #ffffff;
+  --surface-soft: #eef2ff;
+  --text: #0f172a;
+  --muted: #475569;
+  --brand: #3b44f6;
+  --brand-dark: #2c33ba;
+  --border: #d8defa;
+  --radius: 18px;
+  --shadow: 0 16px 48px rgba(23, 31, 84, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", "Albert Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+}
+
+.page-section {
+  padding: clamp(3rem, 4vw, 5rem) 0;
+}
+
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand-dark);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  margin-top: 1.5rem;
+}
+
+.button {
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.button-primary {
+  background: var(--brand);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(59, 68, 246, 0.35);
+}
+
+.button-primary:hover {
+  background: var(--brand-dark);
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background: #ffffff;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.button-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.section-title {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 2rem;
+}
+
+.process-card,
+.feature-card,
+.link-card {
+  padding: 1rem;
+}
+
+.feature-card img,
+.process-card img {
+  border-radius: 14px;
+  margin-bottom: 0.75rem;
+}
+
+.process-card p,
+.feature-card p {
+  margin-bottom: 0;
+}
+
+.strip {
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 700;
+  background: linear-gradient(120deg, #0f172a 0%, #1e2a80 46%, #3b44f6 100%);
+}
+
+.page-hero {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+}
+
+.page-hero-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius) + 8px);
+  min-height: min(72vh, 760px);
+  display: grid;
+  align-items: end;
+  background: #0f172a;
+}
+
+.page-hero-image {
+  position: absolute;
+  inset: 0;
+}
+
+.page-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.76;
+}
+
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.12), transparent 38%),
+    linear-gradient(108deg, rgba(8, 14, 43, 0.72) 10%, rgba(30, 41, 135, 0.45) 58%, rgba(59, 68, 246, 0.16) 100%);
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: clamp(1.6rem, 4vw, 3.2rem);
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(8, 14, 43, 0.62), rgba(8, 14, 43, 0.28));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  backdrop-filter: blur(3px);
+}
+
+.page-hero-content p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+}
+
+.page-hero-content h1,
+.page-hero-content .eyebrow {
+  text-shadow: 0 2px 14px rgba(2, 6, 23, 0.5);
+}
+
+.page-hero-content .eyebrow {
+  color: rgba(236, 245, 255, 0.98);
+}
+
+.hero-highlight-row {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.hero-highlight {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(15, 23, 42, 0.35);
+  color: #ffffff;
+  font-size: 0.86rem;
+  border-radius: 999px;
+  padding: 0.38rem 0.72rem;
+}
+
+.process-split {
+  grid-template-columns: minmax(220px, 38%) minmax(0, 1fr);
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.process-split > img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.process-split > div {
+  padding: 1rem 1.1rem;
+}
+
+.process-split p,
+.process-split li {
+  font-size: 1.06rem;
+}
+
+.process-split.is-reverse > img {
+  order: 2;
+}
+
+.process-split.is-reverse > div {
+  order: 1;
+}
+
+.icon-grid-item {
+  text-align: center;
+}
+
+.icon-grid-item img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  margin: 0 auto 0.8rem;
+}
+
+.stack {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.contact-form {
+  padding: 1.5rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 0.75rem 0.85rem;
+  font: inherit;
+}
+
+.field textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.success-text {
+  margin-top: 1rem;
+  color: #0f6a30;
+  font-weight: 600;
+}
+
+@media (max-width: 920px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .page-hero-inner {
+    min-height: 62vh;
+  }
+
+  .process-split {
+    grid-template-columns: 1fr;
+  }
+
+  .process-split > img {
+    min-height: 180px;
+  }
+}

@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FeatureGrid from "../components/FeatureGrid.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import LinkCards from "../components/LinkCards.astro";
+import PageHero from "../components/PageHero.astro";
+
+const valueCards = [
+  {
+    title: "The smarter way to get paid without merchant fee: real saving",
+    text: "Quick is a secure, QR-based payment method powered by Faster Payment. Customers approve payment using their bank app and biometrics, making safer for them and more cost effective for you. No chargebacks, no frauds."
+  },
+  {
+    title: "A faster, simpler way to get paid – without cards.",
+    text: "Quick is an alternative payment method using Pay-by-Bank (PBB) rails instead of traditional cards networks. It's secure, instant and works across all channels: in-store, online, and via payment links."
+  }
+];
+
+const processItems = [
+  {
+    image: "/images/qr-code-scan.jpg",
+    imageAlt: "Customer scans a QR code to start payment",
+    text: "The merchant displays a QR code, the customer scans the QR code with their phone – no app download needed."
+  },
+  {
+    image: "/images/direct-payment.jpeg",
+    imageAlt: "Bank app opens automatically with payment details",
+    text: "The customer's banking app opens automatically with payment details already filled in."
+  },
+  {
+    image: "/images/biometric-security.jpeg",
+    imageAlt: "Customer confirms with biometrics",
+    text: "The customer approves using biometrics (Face ID, fingerprint, or passcode)."
+  },
+  {
+    image: "/images/payment-successful.jpeg",
+    imageAlt: "Payment success confirmation",
+    text: "The payment is completed instantly and the merchant gets the money right away."
+  }
+];
+
+const routeCards = [
+  { title: "Who we are", href: "/who-we-are/", icon: "/images/icons8-crowd-100.png" },
+  { title: "Our Mission", href: "/our-mission/", icon: "/images/icons8-handmade-100.png" },
+  { title: "Why Quick", href: "/why-merchants-choose-quick/", icon: "/images/icons8-punto-interrogativo-96.png" },
+  { title: "Costs", href: "/our-costs/", icon: "/images/icons8-us-dollar-circled-100.png" },
+  { title: "Contacts", href: "/contacts/", icon: "/images/icons8-edit-pencil-100.png" }
+];
+---
+
+<BaseLayout
+  title="Quick - Use it. Save it."
+  description="Quick is a secure, QR-based payment method that helps UK merchants reduce card fees and get paid instantly."
+  canonicalPath="/"
+>
+  <PageHero
+    eyebrow="Pay by Bank for in-person businesses"
+    title="Use it. Save it."
+    description="Challenge the status quo, giving merchants a smarter, fairer way to accept payments."
+    imageSrc="/images/copertina.webp"
+    imageAlt="Quick payment platform hero"
+    primaryCta={{ href: "/our-costs/", label: "Let's Talk Cost" }}
+    secondaryCta={{ href: "/contacts/", label: "Talk to us" }}
+    highlights={["Instant settlement", "Flat-fee pricing", "No card rails"]}
+  />
+
+  <section class="page-section" style="padding-top: 0;">
+    <div class="container">
+      <div class="surface-card trust-strip">
+        <div>
+          <strong>QR-first checkout</strong>
+          <p>Built for in-store merchants and service businesses.</p>
+        </div>
+        <div>
+          <strong>Secure by design</strong>
+          <p>Consumer approval via banking app and biometrics.</p>
+        </div>
+        <div>
+          <strong>Omni-channel ready</strong>
+          <p>Works in-store, online, and through payment links.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <FeatureGrid items={valueCards} columns="2" />
+    </div>
+  </section>
+
+  <HowItWorks title="How it works" items={processItems} />
+
+  <section class="page-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Refunds are just as easy</h2>
+      </div>
+      <article class="surface-card process-card grid process-split">
+        <img src="/images/qrcode-scan-and-refund.jpeg" alt="QR code refund process" loading="lazy" decoding="async" />
+        <div>
+          <ol>
+            <li>The merchant scans the QR code on the receipt.</li>
+            <li>Approves the refund.</li>
+            <li>The customer gets their money immediately – not in 2-3 days.</li>
+          </ol>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <div class="strip">No cards. No % fees. No waiting.</div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Just fast, secure payments – powered by bank-to-bank technology</h2>
+      </div>
+      <LinkCards items={routeCards} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .trust-strip {
+    padding: 1rem 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .trust-strip strong {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .trust-strip p {
+    margin: 0;
+    font-size: 0.93rem;
+  }
+
+  @media (max-width: 760px) {
+    .trust-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

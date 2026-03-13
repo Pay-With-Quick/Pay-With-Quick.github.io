@@ -1,0 +1,205 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+---
+
+<BaseLayout
+  title="API Docs | Quick"
+  description="Quick API documentation overview for payment creation, status retrieval, and webhook handling."
+  canonicalPath="/docs/"
+>
+  <PageHero
+    eyebrow="Developer Docs"
+    title="Quick API Reference"
+    description="Integrate ePOS payments with Quick APIs for payment creation, QR retrieval, transaction tracking, and refunds."
+    imageSrc="/images/copertina.webp"
+    imageAlt="API integration and developer workflow"
+  />
+
+  <section class="page-section">
+    <div class="container docs-layout">
+      <aside class="docs-nav surface-card">
+        <p class="docs-nav-title">In this page</p>
+        <a href="#auth">Authentication</a>
+        <a href="#create-payment">Create payment</a>
+        <a href="#get-payment">Get payment status</a>
+        <a href="#get-qr">Get QR code</a>
+        <a href="#transactions">Get transactions</a>
+        <a href="#refunds">Refunds</a>
+      </aside>
+
+      <div class="docs-content stack">
+        <article id="auth" class="surface-card feature-card docs-section">
+          <h2>Authentication</h2>
+          <p>Merchant-facing endpoints require API key authentication via the `X-API-KEY` header.</p>
+          <pre><code>X-API-KEY: your_merchant_api_key
+Content-Type: application/json
+Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</code></pre>
+          <p>Use a unique `Idempotency-Key` per payment request to avoid duplicate payment creation.</p>
+        </article>
+
+        <article id="create-payment" class="surface-card feature-card docs-section">
+          <div class="endpoint-head">
+            <span class="method post">POST</span>
+            <code>/api/v1/payments</code>
+          </div>
+          <h3>Create payment</h3>
+          <p>Create a new payment from your ePOS system.</p>
+          <pre><code>{`{
+  "userId": "7f53da67-0f6a-4d68-b19f-6b61f9c68b11",
+  "merchantId": "f95d08bb-e1dc-45a8-8dfd-90b723f8f17d",
+  "amount": 125.50,
+  "currency": "GBP",
+  "metadata": {
+    "orderId": "POS-100245",
+    "terminalId": "TILL-03"
+  }
+}`}</code></pre>
+          <p>Response includes `id`, `status`, `externalId`, and timestamps required for later polling and reconciliation.</p>
+        </article>
+
+        <article id="get-payment" class="surface-card feature-card docs-section">
+          <div class="endpoint-head">
+            <span class="method get">GET</span>
+            <code>/api/v1/payments/&#123;id&#125;</code>
+          </div>
+          <h3>Get payment status</h3>
+          <p>Fetch latest status for a created payment by internal payment id.</p>
+          <pre><code>{`{
+  "id": "f6e4c012-4f60-4cd2-bf2d-4cc88c2f88ae",
+  "merchantId": "f95d08bb-e1dc-45a8-8dfd-90b723f8f17d",
+  "amount": 125.50,
+  "currency": "GBP",
+  "status": "PENDING",
+  "externalId": "pay_abc123"
+}`}</code></pre>
+        </article>
+
+        <article id="get-qr" class="surface-card feature-card docs-section">
+          <div class="endpoint-head">
+            <span class="method get">GET</span>
+            <code>/api/v1/payments/&#123;id&#125;/qr</code>
+          </div>
+          <h3>Create / retrieve QR code</h3>
+          <p>Returns a PNG image for the payment QR that can be displayed on your terminal screen or customer-facing device.</p>
+          <p>This endpoint returns `image/png` bytes and rejects invalid terminal states (for example failed, reversed, expired).</p>
+        </article>
+
+        <article id="transactions" class="surface-card feature-card docs-section">
+          <h3>Get transactions</h3>
+          <div class="endpoint-head">
+            <span class="method get">GET</span>
+            <code>/api/v1/portal/me/transactions?page=0&size=50</code>
+          </div>
+          <p>Returns transactions for the authenticated merchant profile (recommended for merchant dashboard views).</p>
+          <div class="endpoint-head">
+            <span class="method get">GET</span>
+            <code>/api/v1/payments/merchant/&#123;merchantId&#125;</code>
+          </div>
+          <p>Returns payments for a specified merchant id (useful for server-side reconciliation workflows).</p>
+        </article>
+
+        <article id="refunds" class="surface-card feature-card docs-section">
+          <h3>Refund APIs</h3>
+          <div class="endpoint-head">
+            <span class="method post">POST</span>
+            <code>/api/v1/payments/&#123;paymentId&#125;/refund?amount=20.00&reference=partial_refund</code>
+          </div>
+          <p>Create a full or partial refund.</p>
+          <div class="endpoint-head">
+            <span class="method get">GET</span>
+            <code>/api/v1/payments/&#123;paymentId&#125;/refunds</code>
+          </div>
+          <p>Retrieve all refunds linked to a payment for audit and support flows.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="/contacts/">Request API credentials</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .docs-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .docs-nav {
+    position: sticky;
+    top: 92px;
+    padding: 1rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .docs-nav-title {
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .docs-nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .docs-nav a:hover {
+    background: #e8ecff;
+    color: var(--brand-dark);
+  }
+
+  .docs-section pre {
+    margin: 0.8rem 0 0.9rem;
+    background: #0b1228;
+    color: #dbeafe;
+    border-radius: 10px;
+    overflow-x: auto;
+    padding: 0.8rem;
+  }
+
+  .docs-section code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.86rem;
+  }
+
+  .endpoint-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .method {
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1;
+    padding: 0.35rem 0.48rem;
+    color: #ffffff;
+  }
+
+  .method.get {
+    background: #0f766e;
+  }
+
+  .method.post {
+    background: #1d4ed8;
+  }
+
+  @media (max-width: 980px) {
+    .docs-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .docs-nav {
+      position: static;
+    }
+  }
+</style>

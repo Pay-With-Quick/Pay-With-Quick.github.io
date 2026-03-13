@@ -1,0 +1,39 @@
+---
+// @ts-nocheck
+const { eyebrow, title, description, imageSrc, imageAlt, primaryCta, secondaryCta, highlights = [] } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner surface-card">
+      <div class="page-hero-image">
+        <img src={imageSrc} alt={imageAlt || ""} loading="eager" decoding="async" />
+      </div>
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+        <h1>{title}</h1>
+        <p>{description}</p>
+        {(primaryCta || secondaryCta) && (
+          <div class="button-row">
+            {primaryCta && (
+              <a class="button button-primary" href={primaryCta.href}>
+                {primaryCta.label}
+              </a>
+            )}
+            {secondaryCta && (
+              <a class="button button-secondary" href={secondaryCta.href}>
+                {secondaryCta.label}
+              </a>
+            )}
+          </div>
+        )}
+        {highlights.length > 0 && (
+          <div class="hero-highlight-row" aria-label="Hero highlights">
+            {highlights.map((item) => <span class="hero-highlight">{item}</span>)}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

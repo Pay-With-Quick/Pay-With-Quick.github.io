@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+---
+
+<BaseLayout
+  title="Let's Talk Cost | Quick"
+  description="See how Quick's flat-fee payment model helps merchants save more per transaction compared with card fees."
+  canonicalPath="/our-costs/"
+>
+  <PageHero
+    eyebrow="Pricing"
+    title="Let's Talk Cost"
+    description="Card payments quietly drain your profits. Quick helps you keep more of what you earn: the higher the transaction value, the higher your saving."
+    imageSrc="/images/adobestock_335183210.jpeg"
+    imageAlt="Business cost planning and payments analysis"
+    primaryCta={{ href: "/contacts/", label: "Get a tailored analysis" }}
+  />
+
+  <section class="page-section">
+    <div class="container">
+      <article class="surface-card feature-card">
+        <h2>A real-world example</h2>
+        <ul>
+          <li>Average transaction value: £500</li>
+          <li>Typical debit card fee (0.40%–0.45%): £2 - £2.25 per transaction</li>
+          <li>Quick flat fee: over 35% less per transaction</li>
+          <li>Your savings: £0.7 - £1 every time someone pays you</li>
+        </ul>
+        <p><strong>Now imagine this at scale.</strong></p>
+        <div class="button-row">
+          <a class="button button-primary" href="/contacts/">Get in touch for a tailored analysis of your business</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

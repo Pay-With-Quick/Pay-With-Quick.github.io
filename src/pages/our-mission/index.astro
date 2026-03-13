@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import FeatureGrid from "../../components/FeatureGrid.astro";
+
+const values = [
+  {
+    title: "Savings",
+    text: "We replace unpredictable card fees with a low, transparent cost per transaction, helping merchants protect their margins.",
+    image: "/images/saving-money-2.jpeg",
+    imageAlt: "Savings illustration"
+  },
+  {
+    title: "Security",
+    text: "Every payment is approved by the consumer using biometrics and their banking app, ensuring trust and fraud protection.",
+    image: "/images/security.jpeg",
+    imageAlt: "Secure mobile payment"
+  },
+  {
+    title: "Consumer Choice",
+    text: "We empower customers with a seamless, card-free way to pay in person, building loyalty while driving down cost.",
+    image: "/images/customer-choice.jpg",
+    imageAlt: "Customer paying with a phone"
+  }
+];
+---
+
+<BaseLayout
+  title="Our Mission | Quick"
+  description="Quick is on a mission to offer in-person payment choice and instant secure settlements without traditional card rails."
+  canonicalPath="/our-mission/"
+>
+  <PageHero
+    eyebrow="Our Mission"
+    title="A fairer in-person payment experience"
+    description="To offer in-person payment choice to consumers by enabling merchants to get paid instantly and securely without relying on traditional cards."
+    imageSrc="/images/copertina.webp"
+    imageAlt="Digital payment experience"
+  />
+
+  <section class="page-section">
+    <div class="container">
+      <article class="surface-card feature-card" style="margin-bottom: 1.25rem;">
+        <h2>Our Values</h2>
+        <p>
+          We use bank-to-bank technology to reduce costs, speed up settlement, and challenge outdated payment systems.
+        </p>
+      </article>
+      <FeatureGrid items={values} columns="3" />
+    </div>
+  </section>
+</BaseLayout>

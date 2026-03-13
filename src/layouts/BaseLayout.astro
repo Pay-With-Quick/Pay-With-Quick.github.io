@@ -1,0 +1,87 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { site } from "../content/site.js";
+import "../styles/global.css";
+
+const {
+  title = "Quick - Use it. Save it.",
+  description = "Quick is a secure, QR-based payment method helping merchants get paid instantly with flat, transparent costs.",
+  canonicalPath = "/",
+  ogImage = "/images/copertina.webp"
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, Astro.site).toString();
+const ogImageAbsolute = new URL(ogImage, Astro.site).toString();
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: "https://paywithquick.co.uk",
+  email: site.email,
+  telephone: site.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Ingeborg, Middle Hill",
+    addressLocality: "Egham",
+    addressRegion: "England",
+    postalCode: "TW20 0JG",
+    addressCountry: "GB"
+  }
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Quick" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:image:alt" content="Quick Pay by Bank website preview" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <link rel="icon" type="image/png" href="/images/cropped-prova.png" />
+    <link rel="apple-touch-icon" href="/images/cropped-prova.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <SiteHeader />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    background: #111827;
+    color: #ffffff;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .skip-link:focus {
+    left: 0.75rem;
+  }
+</style>

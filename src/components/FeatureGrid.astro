@@ -1,0 +1,21 @@
+---
+// @ts-nocheck
+/** @typedef {{ title: string; text: string; icon?: string; image?: string; imageAlt?: string }} FeatureItem */
+/** @type {{ items?: FeatureItem[]; columns?: "2" | "3" | "4" }} */
+const { items = [], columns = "3" } = Astro.props;
+const gridClass = columns === "2" ? "grid-2" : columns === "4" ? "grid-4" : "grid-3";
+const featureItems = /** @type {FeatureItem[]} */ (items);
+---
+
+<div class={`grid ${gridClass}`}>
+  {
+    featureItems.map((/** @type {FeatureItem} */ item) => (
+      <article class="surface-card feature-card">
+        {item.icon && <img src={item.icon} alt="" width="96" height="96" loading="lazy" decoding="async" />}
+        {item.image && <img src={item.image} alt={item.imageAlt || ""} loading="lazy" decoding="async" />}
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </article>
+    ))
+  }
+</div>

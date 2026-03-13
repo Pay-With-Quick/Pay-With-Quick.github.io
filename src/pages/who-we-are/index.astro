@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+
+---
+
+<BaseLayout
+  title="Who we are | Quick"
+  description="Meet the team behind Quick and discover why we are building a smarter, fairer way for merchants to accept payments."
+  canonicalPath="/who-we-are/"
+>
+  <PageHero
+    eyebrow="Who we are"
+    title="Built by Merchants, for Merchants"
+    description="Quick was founded by Delia Pedersoli, a seasoned expert with over 20 years of experience in digital payments."
+    imageSrc="/images/adobestock_335183210.jpeg"
+    imageAlt="Team collaboration in a payments business"
+    primaryCta={{ href: "/contacts/", label: "Contact our team" }}
+  />
+
+  <section class="page-section">
+    <div class="container">
+      <article class="surface-card feature-card">
+        <h2>Who we are</h2>
+        <p>
+          Quick was founded by Delia Pedersoli, a seasoned expert with over 20 years of experience in the digital payments
+          industry. Having worked with global merchants like IKEA, Carrefour, Zara, Mediamarket, and The Frasers Group,
+          Delia understands the complexity and cost of accepting payments, especially in face-to-face and cross-border
+          environments.
+        </p>
+        <p>
+          She's successfully built and exited multiple fintech startups, and now leads a team of professionals with deep
+          experience in alternative payments, acquiring, and merchant technology.
+        </p>
+        <p>
+          Frustrated by outdated systems and excessive card fees, she created Quick to challenge the status quo, giving
+          merchants a smarter, fairer way to accept payments.
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
