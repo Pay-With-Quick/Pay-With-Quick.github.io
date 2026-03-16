@@ -21,6 +21,7 @@ import PageHero from "../../components/PageHero.astro";
       <aside class="docs-nav surface-card">
         <p class="docs-nav-title">In this page</p>
         <a href="#auth">Authentication</a>
+        <a href="#merchant-integration">Merchant integration (API key)</a>
         <a href="#create-payment">Create payment</a>
         <a href="#get-payment">Get payment status</a>
         <a href="#get-qr">Get QR code</a>
@@ -36,6 +37,18 @@ import PageHero from "../../components/PageHero.astro";
 Content-Type: application/json
 Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</code></pre>
           <p>Use a unique `Idempotency-Key` per payment request to avoid duplicate payment creation.</p>
+        </article>
+
+        <article id="merchant-integration" class="surface-card feature-card docs-section">
+          <h2>Merchant integration (API key)</h2>
+          <p>For ePOS and server integrations, use your merchant API key in the <code>X-API-KEY</code> header. These four endpoints cover the core flows:</p>
+          <ul>
+            <li><strong>Create payment</strong> — <code>POST /api/v1/payments</code> — Create a new payment and receive a payment <code>id</code>.</li>
+            <li><strong>Get QR code</strong> — <code>GET /api/v1/payments/&#123;id&#125;/qr</code> — Fetch a PNG QR image for the customer to scan.</li>
+            <li><strong>Get transaction status</strong> — <code>GET /api/v1/payments/&#123;id&#125;</code> — Poll status for a single payment.</li>
+            <li><strong>Get all transactions</strong> — <code>GET /api/v1/payments</code> — List all payments for the authenticated merchant (no path parameter; merchant is derived from the API key).</li>
+          </ul>
+          <p>All four require <code>X-API-KEY</code>. Create payment also requires <code>Idempotency-Key</code> and a JSON body with <code>userId</code>, <code>merchantId</code>, <code>amount</code>, and <code>currency</code>.</p>
         </article>
 
         <article id="create-payment" class="surface-card feature-card docs-section">
@@ -89,14 +102,14 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</code></pre>
           <h3>Get transactions</h3>
           <div class="endpoint-head">
             <span class="method get">GET</span>
-            <code>/api/v1/portal/me/transactions?page=0&size=50</code>
+            <code>/api/v1/payments</code>
           </div>
-          <p>Returns transactions for the authenticated merchant profile (recommended for merchant dashboard views).</p>
+          <p>List all payments for the authenticated merchant. Send <code>X-API-KEY</code>; the merchant is derived from the key, so no <code>merchantId</code> in the path is required. Returns an array of payment objects.</p>
           <div class="endpoint-head">
             <span class="method get">GET</span>
-            <code>/api/v1/payments/merchant/&#123;merchantId&#125;</code>
+            <code>/api/v1/portal/me/transactions?page=0&size=50</code>
           </div>
-          <p>Returns payments for a specified merchant id (useful for server-side reconciliation workflows).</p>
+          <p>Paginated transactions for the authenticated merchant (portal/dashboard; uses Bearer JWT rather than API key).</p>
         </article>
 
         <article id="refunds" class="surface-card feature-card docs-section">
