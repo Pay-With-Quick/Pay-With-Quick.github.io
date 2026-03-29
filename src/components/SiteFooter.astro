@@ -44,9 +44,28 @@ import { navLinks, site } from "../content/site.js";
         <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
         <p><a href="tel:+447786088188">{site.phone}</a></p>
       </section>
+
+      <section>
+        <h3>Legal</h3>
+        <ul class="footer-links">
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/cookie-policy/">Cookie Policy</a></li>
+          <li><a href="#" id="open-cookie-settings">Cookie settings</a></li>
+        </ul>
+      </section>
     </div>
   </div>
 </footer>
+
+<script>
+  const cookieSettingsLink = document.getElementById("open-cookie-settings");
+  if (cookieSettingsLink) {
+    cookieSettingsLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.dispatchEvent(new Event("quick:open-cookie-settings"));
+    });
+  }
+</script>
 
 <style>
   .site-footer {
@@ -80,7 +99,7 @@ import { navLinks, site } from "../content/site.js";
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1.4fr 1fr;
+    grid-template-columns: 1.2fr 1.4fr 1fr 0.9fr;
     gap: 1.2rem;
     align-items: start;
   }

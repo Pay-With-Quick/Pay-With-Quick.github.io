@@ -1,0 +1,51 @@
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <div class="cookie-banner__inner">
+    <p>
+      We use strictly necessary cookies to run this website and optional analytics cookies to improve performance.
+      You can accept or reject optional cookies. See our
+      <a href="/cookie-policy/">Cookie Policy</a> and <a href="/privacy-policy/">Privacy Policy</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="button button-secondary" id="cookie-reject">Reject optional</button>
+      <button type="button" class="button button-primary" id="cookie-accept">Accept all</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const STORAGE_KEY = "quick_cookie_consent_v1";
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("cookie-accept");
+    const rejectBtn = document.getElementById("cookie-reject");
+    if (!banner || !acceptBtn || !rejectBtn) return;
+
+    const existing = localStorage.getItem(STORAGE_KEY);
+    if (!existing) {
+      banner.hidden = false;
+    }
+
+    const persist = (value) => {
+      const payload = JSON.stringify({ ...value, updatedAt: new Date().toISOString() });
+      localStorage.setItem(STORAGE_KEY, payload);
+      document.cookie =
+        "quick_cookie_consent=" +
+        encodeURIComponent(payload) +
+        "; Max-Age=31536000; Path=/; SameSite=Lax";
+      banner.hidden = true;
+    };
+
+    acceptBtn.addEventListener("click", () => {
+      persist({ analytics: true, essential: true });
+    });
+
+    rejectBtn.addEventListener("click", () => {
+      persist({ analytics: false, essential: true });
+    });
+
+    window.addEventListener("quick:open-cookie-settings", () => {
+      banner.hidden = false;
+      banner.scrollIntoView({ behavior: "smooth", block: "end" });
+    });
+  })();
+</script>

@@ -338,6 +338,47 @@ p {
   font-weight: 600;
 }
 
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 120;
+  background: rgba(10, 16, 36, 0.97);
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.cookie-banner__inner {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+  padding: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cookie-banner p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+}
+
+.cookie-banner a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.cookie-banner__actions {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.cookie-banner__actions .button {
+  white-space: nowrap;
+}
+
 @media (max-width: 920px) {
   .grid-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -361,5 +402,10 @@ p {
 
   .process-split > img {
     min-height: 180px;
+  }
+
+  .cookie-banner__inner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
